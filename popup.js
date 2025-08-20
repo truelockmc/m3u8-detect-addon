@@ -1,45 +1,64 @@
-// popup.js
-
 const ul = document.getElementById("linkList");
 
-// Funktion zum Hinzufügen eines Links zum UI
-function addLinkItem(url) {
+function addLinkItem(url, isNew) {
   const li = document.createElement("li");
+  li.style.paddingLeft = '2px';
+  if (isNew) {
+    const mark = document.createElement("span");
+    mark.textContent = "New";
+    mark.style.color = "green";
+    mark.style.fontSize = "0.8em";
+    li.appendChild(mark);
+    li.appendChild(document.createElement("br"));
+  }
 
-  // Clipboard-Button
   const btn = document.createElement("button");
   btn.textContent = "📋";
   btn.className = "button";
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(url);
-  });
+  btn.addEventListener("click", () => navigator.clipboard.writeText(url));
 
-  // Link
   const a = document.createElement("a");
   a.textContent = url;
   a.href = url;
   a.target = "_blank";
   a.addEventListener("dblclick", () => window.open(url, "_blank"));
 
-  // Hinzufügen der Elemente zum Listenelement
   li.appendChild(btn);
   li.appendChild(a);
   ul.appendChild(li);
 }
 
-// Funktion zum Laden der Links
 async function loadLinks() {
   const result = await browser.runtime.sendMessage({ type: "getLinks" });
   const links = result.links || [];
-  links.forEach(addLinkItem);
+  const wasOpened = result.wasOpenedCount || 0;
+  links.forEach((url, idx) => {
+    const isNew = idx >= wasOpened;
+    addLinkItem(url, isNew);
+  });
+  browser.browserAction.setBadgeText({ text: '', tabId: (await browser.tabs.query({active:true,currentWindow:true}))[0].id });
 }
 
-// Listener für neue Links
-browser.runtime.onMessage.addListener(msg => {
-  if (msg.type === "newLink") {
-    addLinkItem(msg.url);
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+    if (tab && tab.id != null) {
+      await browser.action.setBadgeText({ text: '', tabId: tab.id });
+    }
+  } catch (err) {
+    console.error("Badge reset error:", err);
+  }
+
+  try {
+    const result = await browser.runtime.sendMessage({ type: "getLinks" });
+    const links = result.links || [];
+    const wasOpened = result.wasOpenedCount || 0;
+    links.forEach((url, idx) => {
+      const isNew = idx >= wasOpened;
+      addLinkItem(url, isNew);
+    });
+  } catch (err) {
+    console.error("Loading links failed:", err);
   }
 });
 
-// Beim Laden des Popups Links anzeigen
-document.addEventListener("DOMContentLoaded", loadLinks);

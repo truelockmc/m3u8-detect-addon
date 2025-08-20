@@ -1,31 +1,34 @@
-// background.js
+browser.runtime.onInstalled.addListener(initBadge);
+browser.runtime.onStartup.addListener(initBadge);
+
+function initBadge() {
+  browser.action.setBadgeText({ text: '' });
+}
 
 const foundLinks = new Set();
 
-// Listener für Netzwerkrequests
 browser.webRequest.onBeforeRequest.addListener(
   details => {
     const url = details.url;
-    // Filter: Nur speichern, wenn URL player.videasy.net oder .m3u8/.wasm/.js enthält
-    // UND nicht '.wasm', '.js' oder 'chunks'
     if (
       (url.includes("player.videasy.net/") || url.includes(".m3u8")) &&
       !url.includes("chunks") &&
       !url.includes(".wasm") &&
       !url.includes(".js") &&
+      !url.includes(".css") &&
       !foundLinks.has(url)
     ) {
       foundLinks.add(url);
-      browser.runtime.sendMessage({ type: "newLink", url });
-      console.log("Found", url);
 
-      // Benachrichtigung anzeigen, wenn ein m3u8-Link erkannt wurde
+      browser.action.setBadgeText({ text: 'New', tabId: details.tabId });
+      browser.action.setBadgeBackgroundColor({ color: '#0f0', tabId: details.tabId });
+
       if (url.endsWith(".m3u8")) {
         browser.notifications.create({
           type: "basic",
           iconUrl: "icons/icon-48.png",
-          title: "M3U8-Link erkannt",
-          message: `Ein M3U8-Link wurde erkannt: ${url}`,
+          title: "M3U8-URL detected",
+          message: `A new .meu8 Link was detected: ${url}`
         });
       }
     }
@@ -34,9 +37,8 @@ browser.webRequest.onBeforeRequest.addListener(
   []
 );
 
-// Listener für Nachrichten vom Popup
-browser.runtime.onMessage.addListener((msg, sender) => {
+browser.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === "getLinks") {
-    return Promise.resolve({ links: Array.from(foundLinks) });
+    sendResponse({ links: Array.from(foundLinks) });
   }
 });

@@ -4,6 +4,7 @@
   "version": "1.0",
   "permissions": [
     "activeTab",
+    "tabs",
     "storage",
     "scripting",
     "webRequest",
@@ -22,7 +23,7 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "48": "icons/icon-48.png"
+      "48": "icon.ico"
     }
   },
   "browser_specific_settings": {
