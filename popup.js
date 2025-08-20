@@ -15,7 +15,7 @@ function addLinkItem(url, isNew) {
   if (isNew) {
     const mark = document.createElement("span");
     mark.textContent = "New";
-    mark.style.color = "green";
+    mark.style.color = "lime";
     mark.style.fontSize = "0.8em";
     li.appendChild(mark);
     li.appendChild(document.createElement("br"));

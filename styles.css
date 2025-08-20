@@ -30,7 +30,8 @@ a:hover {
   color:#80cfff;      /* noch heller beim Hover */
 }
 .button { 
-  margin-left:8px; 
+  margin-left:8px;
+  margin-right:8px;
   background:#444; 
   border:none; 
   color:#eee; 
