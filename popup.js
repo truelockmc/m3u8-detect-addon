@@ -3,6 +3,15 @@ const ul = document.getElementById("linkList");
 function addLinkItem(url, isNew) {
   const li = document.createElement("li");
   li.style.paddingLeft = '2px';
+  
+  if (url.includes("master.m3u8") || url.includes("playlist.m3u8")) {
+    const crown = document.createElement("span");
+    crown.textContent = "👑 ";
+    crown.style.marginRight = "4px";
+    li.appendChild(crown);
+  }
+
+  
   if (isNew) {
     const mark = document.createElement("span");
     mark.textContent = "New";
