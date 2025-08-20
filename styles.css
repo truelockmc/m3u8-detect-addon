@@ -36,5 +36,11 @@ a:hover {
   border:none; 
   color:#eee; 
   padding:2px 6px; 
-  cursor:pointer; 
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+
+.button:active {
+  background: #666;
 }

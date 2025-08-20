@@ -13,6 +13,7 @@ browser.webRequest.onBeforeRequest.addListener(
     if (
       (url.includes("player.videasy.net/") || url.includes(".m3u8")) &&
       !url.includes("chunks") &&
+      !url.includes(".ico") &&
       !url.includes(".wasm") &&
       !url.includes(".js") &&
       !url.includes(".css") &&
