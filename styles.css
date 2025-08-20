@@ -1,6 +1,39 @@
-body, html { margin:0; padding:0; font-family:sans-serif; }
-.dark { background:#121212; color:#eee; width:320px; padding:10px; }
-ul { list-style:none; padding:0; }
-li { margin:8px 0; display:flex; align-items:center; }
-a { color:#66f; cursor:pointer; flex:1; }
-.button { margin-left:8px; background:#444; border:none; color:#eee; padding:2px 6px; cursor:pointer; }
+body, html { 
+  margin:0; 
+  padding:0; 
+  font-family:sans-serif; 
+}
+.dark { 
+  background:#000000; 
+  color:#eee; 
+  width:320px; 
+  padding:10px; 
+}
+ul { 
+  list-style:none; 
+  padding:0; 
+}
+li { 
+  margin:8px 0; 
+  display:flex; 
+  align-items:center; 
+}
+a { 
+  color:#4da6ff;
+  cursor:pointer; 
+  flex:1;
+  text-decoration:none;
+  font-weight:500;
+  text-shadow: 0 0 4px rgba(77,166,255,0.6); /* leichter Glow-Effekt */
+}
+a:hover {
+  color:#80cfff;      /* noch heller beim Hover */
+}
+.button { 
+  margin-left:8px; 
+  background:#444; 
+  border:none; 
+  color:#eee; 
+  padding:2px 6px; 
+  cursor:pointer; 
+}
