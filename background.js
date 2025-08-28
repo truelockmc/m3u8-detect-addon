@@ -29,7 +29,7 @@ browser.webRequest.onBeforeRequest.addListener(
           type: "basic",
           iconUrl: "icons/icon-48.png",
           title: "M3U8-URL detected",
-          message: `A new .meu8 Link was detected: ${url}`
+          message: `A new .m3u8 Link was detected: ${url}`
         });
       }
     }
