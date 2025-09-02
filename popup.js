@@ -65,9 +65,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     links.forEach((url, idx) => {
       const isNew = idx >= wasOpened;
       addLinkItem(url, isNew);
+
     });
   } catch (err) {
     console.error("Loading links failed:", err);
   }
 });
 
+const clearBtn = document.getElementById("clearBtn");
+clearBtn.addEventListener("click", async () => {
+  if (confirm("Are you sure you want to clear all links?")) {
+    await browser.runtime.sendMessage({ type: "clearLinks" });
+
+    location.reload();
+  }
+});

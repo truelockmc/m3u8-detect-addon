@@ -44,3 +44,17 @@ a:hover {
 .button:active {
   background: #666;
 }
+
+.clear-button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 6px;
+  background: #d9534f;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.clear-button:hover {
+  background: #c9302c;
+}
+

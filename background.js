@@ -6,6 +6,7 @@ function initBadge() {
 }
 
 const foundLinks = new Set();
+let lastOpenedCount = 0;
 
 browser.webRequest.onBeforeRequest.addListener(
   details => {
@@ -40,6 +41,13 @@ browser.webRequest.onBeforeRequest.addListener(
 
 browser.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === "getLinks") {
-    sendResponse({ links: Array.from(foundLinks) });
+    const links = Array.from(foundLinks);
+    sendResponse({ links, wasOpenedCount: lastOpenedCount });
+    lastOpenedCount = links.length;
+  } else if (msg.type === "clearLinks") {
+    foundLinks.clear();
+
+    browser.action.setBadgeText({ text: '' });
+    sendResponse({ cleared: true });
   }
 });
