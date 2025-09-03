@@ -12,7 +12,7 @@ browser.webRequest.onBeforeRequest.addListener(
   details => {
     const url = details.url;
     if (
-      (url.includes("player.videasy.net/") || url.includes(".m3u8")) &&
+      (url.includes(".m3u8")) &&
       !url.includes("chunks") &&
       !url.includes(".ico") &&
       !url.includes(".wasm") &&

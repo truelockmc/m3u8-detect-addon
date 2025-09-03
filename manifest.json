@@ -2,6 +2,8 @@
   "manifest_version": 3,
   "name": "M3U8 Link Finder",
   "version": "2.0",
+  "description": "Detects embedded .m3u8 streams on pages and lists them",
+  "author": "Dein Name oder Entwicklername",
   "permissions": [
     "activeTab",
     "tabs",
@@ -16,15 +18,17 @@
     "*://*/*"
   ],
   "background": {
-  "scripts": ["background.js"],
-  "service_worker": "background.js"
-
+    "scripts": ["background.js"],
+    "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html",
     "default_icon": {
+      "16": "icon.ico",
+      "32": "icon.ico",
       "48": "icon.ico"
-    }
+    },
+    "default_popup": "popup.html",
+    "default_area": "navbar"
   },
   "browser_specific_settings": {
     "gecko": { "id": "{f3aa4a03-eb29-4983-a834-6e1210b61d94}" }
