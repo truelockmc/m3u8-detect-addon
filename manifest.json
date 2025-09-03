@@ -5,8 +5,12 @@
   "description": "Detect .m3u8 Links on any website to download them",
   "author": "true_lock",
   "icons": {
-    "32": "sized_icons/icon-32.png",
-    "64": "sized_icons/icon-64.png"
+    "16": "icons/icon.svg",
+    "24": "icons/icon.svg",
+    "32": "icons/icon.svg",
+    "48": "icons/icon.svg",
+    "64": "icons/icon.svg",
+    "128": "icons/icon.svg"
   },
   "permissions": [
     "activeTab",
@@ -29,9 +33,12 @@
     "default_popup": "popup.html",
     "default_area": "navbar",
     "default_icon": {
-      "16": "sized_icons/icon-16.png",
-      "32": "sized_icons/icon-32.png",
-      "48": "sized_icons/icon-48.png"
+      "16": "icons/icon.svg",
+      "24": "icons/icon.svg",
+      "32": "icons/icon.svg",
+      "48": "icons/icon.svg",
+      "64": "icons/icon.svg",
+      "128": "icons/icon.svg"
     }
   },
   "browser_specific_settings": {
