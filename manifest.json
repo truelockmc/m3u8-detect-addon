@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "M3U8 Link Finder",
-  "version": "2.1",
+  "version": "2.2",
   "description": "Detect .m3u8 Links on any website to download them",
   "author": "true_lock",
   "icons": {
