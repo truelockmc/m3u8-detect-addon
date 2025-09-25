@@ -34,7 +34,7 @@ function addLinkItem(url, isNew) {
 
   li.appendChild(btn);
   li.appendChild(a);
-  ul.appendChild(li);
+  ul.insertBefore(li, ul.firstChild);
 }
 
 async function loadLinks() {
@@ -58,19 +58,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Badge reset error:", err);
   }
 
-  try {
-    const result = await browser.runtime.sendMessage({ type: "getLinks" });
-    const links = result.links || [];
-    const wasOpened = result.wasOpenedCount || 0;
-    links.forEach((url, idx) => {
-      const isNew = idx >= wasOpened;
-      addLinkItem(url, isNew);
-
-    });
-  } catch (err) {
-    console.error("Loading links failed:", err);
-  }
+  await loadLinks();
 });
+
 
 const clearBtn = document.getElementById("clearBtn");
 clearBtn.addEventListener("click", async () => {
