@@ -14,11 +14,8 @@
   },
   "permissions": [
     "activeTab",
-    "tabs",
     "storage",
-    "scripting",
     "webRequest",
-    "webRequestBlocking",
     "webRequestFilterResponse",
     "notifications"
   ],
